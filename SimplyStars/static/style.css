@@ -1,0 +1,219 @@
+.top-bar {
+    background-color: #7C7C7C; 
+    height: 80px; 
+    width: calc(100% - 20px); 
+    margin: 0 auto; 
+    margin-top: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-bar{
+    background-color: black; 
+    height: 60px; 
+    width: 600px; 
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 30px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.help-button {
+    background-color: black;
+    color: white;
+    border: none;
+    font-size: 30px;    
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    height: 60px; 
+    margin-right: 100px;
+}
+
+.logout-button {
+    background-color: black;
+    color: white;
+    border: none;
+    font-size: 30px;    
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    height: 60px; 
+    margin-right: 20px;
+}
+
+.filters{
+    color: white;
+    align-items: center;    
+}
+
+#automateBtn{
+    display: inline-block; 
+    float: right; 
+    font-size:30px; 
+    border-radius: 10px;
+    color: white;
+    background-color: black;
+}
+
+.content-container {
+    display: flex;
+    align-items: flex-start;
+}
+
+.courses-container {
+    width: 100%; 
+    margin-right: 5%;
+    padding-right: 4%;
+}
+
+.timetable-container {
+    width: 95%; 
+    max-width: 1250px; 
+    padding-left: 4%;
+    align-items: center;
+    text-align: center;
+}
+
+#timetable {
+    border-collapse: separate;
+    text-indent: initial;
+    line-height: normal;
+    font-weight: normal;
+    font-size: medium;
+    font-style: normal;
+    color: white;
+    text-align: start;
+    border-spacing: 1px;
+    white-space: normal;
+    font-variant: normal;
+    font: 1em/1.55 Lato, Arial, sans-serif;
+}
+
+#timetable, #timetable th, #timetable td {
+    border: 1px solid #ddd;
+}
+
+#timetable th, #timetable td {
+    font-size: 10px;
+    color: black;
+}
+
+#timetable thead {
+    background-color: #f2f2f2;
+}
+
+#timetable tr:nth-child(even) {
+    background-color: #CAE2EA; /*#432f2f;*/
+}
+
+#timetable tr:nth-child(odd) {
+    background-color: #EBFAFF
+}
+
+#timetable tr:hover {
+    background-color: #e8e8e8;
+}
+
+#timetable .class {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+#timetable th {
+    text-align: center;
+    background-color: #BCBCC8; /*#4f6d87;*/
+    color: rgb(19, 16, 16);
+    font-size: 10px;
+}
+
+#overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a z-index elsewhere */
+    cursor: pointer; /* Add a pointer on hover */
+}
+
+#text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 20px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+}
+/* Everything below is for tooltip styling */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    opacity: 1;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: -195px;
+    left: 55px;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .course-li {
+    background-color: #C1C1C1; 
+    text-align: left; 
+    padding:10px; 
+    word-wrap: break-word; 
+    width:230px; 
+    list-style-type: none; 
+    border-radius: 10px; 
+    margin-bottom: 5px;
+  }
+
+  .courselist {
+    position: relative;
+}
+
+  .removebutton {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: -12px;
+    right: -12px;
+  }
+
+  .removebutton svg {
+    width: 100%;
+    height: 100%;
+}
+
+  .bi.bi-x-circle:hover path {
+    fill: red; /* Change the X color to red on hover */
+}
+  

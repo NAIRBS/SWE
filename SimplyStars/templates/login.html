@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login Page
+{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <h2 class="welcome-header" style="color:aquamarine">You are 1 step away from using SimplyStars! Login</h2>
+    <br><br>
+    <form id="login" method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.username.label() }}
+            {{ form.username() }}
+        </div>
+        <div class="form-group">
+            {{ form.password.label() }}
+            {{ form.password() }}
+        </div>
+        <button type="submit" class="btn btn-sm btn-secondary">Login</button>
+        <br><br>
+        <div class="checkbox mb-3">
+            <h6> Do not have an account?</h6>
+            <a class="btn btn-sm btn-secondary" href="{{ url_for('register_page') }}">Register</a>
+        </div>
+        <div class="checkbox mb-3">
+            <h6> Forget Password?</h6>
+            <a class="btn btn-sm btn-secondary" href="{{ url_for('forgetPassword_page') }}">Forget Password</a>
+        </div>
+    </form>
+
+</div>
+{% endblock %}
