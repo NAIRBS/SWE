@@ -106,7 +106,7 @@ google.auth.exceptions.RefreshError: ('invalid_grant: Token has been expired or 
 ### You can view the Database file in instance >> SimplyStars.db with [DB Browser](https://sqlitebrowser.org/dl/)
 The Database already comes with a default account:
 ```
-Username: diheng
+Username: test
 Password: 123
 ```
 
