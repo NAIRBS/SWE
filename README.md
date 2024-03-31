@@ -107,7 +107,7 @@ google.auth.exceptions.RefreshError: ('invalid_grant: Token has been expired or 
 The Database already comes with a default account:
 ```
 Username: test
-Password: 123
+Password: 1234
 ```
 
 > This account can be used to log into SimplyStars if the user does not want to create an account, or has trouble with the Gmail OTP API and cannot create one themselves. 
