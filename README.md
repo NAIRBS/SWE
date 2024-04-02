@@ -1,3 +1,7 @@
+
+<img src="https://github.com/NAIRBS/SimplyStars-Course-Planner-Prototype/assets/86892301/04a1819c-b2f4-43b6-9a90-270d2b2a39f4" alt="Image" width="1200"/>
+
+
 > [!IMPORTANT]
 > This guide is written with the assumption that you are using a Windows machine, macOS users might find differences in setup and execution while following this guide.
 
