@@ -29,7 +29,7 @@ class RegisterForm(FlaskForm):
     
 class CourseCodeForm(FlaskForm):
       
-    course_code = StringField(label="Enter Course Code:", validators=[DataRequired()], render_kw={"placeholder": " Enter Course Code here!"})
+    course_code = StringField(label="Enter Course Code:", validators=[DataRequired()], render_kw={"placeholder": "  Enter Course Code"})
     add = SubmitField("Add")
     
 class forgetPasswordForm(FlaskForm):

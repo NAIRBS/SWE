@@ -8,11 +8,11 @@ def get_coursename_au(html_content):
     
     rows = soup.find_all('tr')
     course_code = rows[0].find_all('td')[0].text.strip()
-    course_name = rows[0].find_all('td')[1].text.strip() 
+    course_name = rows[0].find_all('td')[1].text.strip()
     au_value = rows[0].find_all('td')[2].text.strip()
 
     if course_name.endswith('~'):
-        course_name = course_name[:-1]  # Remove the last character (tilde)
+	    course_name = course_name[:-1]  # Remove the last character (tilde)
     
     return course_code, course_name, au_value
 
@@ -73,32 +73,31 @@ def get_schedule(user_id):
     }
     ################################################################################
     # get all unique course code
-    course_codes = (db.session.query(CourseSchedule.course_code)
-                    .filter_by(user_id=user_id)
-                    .group_by(CourseSchedule.course_code)
-                    .all())
+    # course_codes = (db.session.query(CourseSchedule.course_code)
+    #                 .filter_by(user_id=user_id)
+    #                 .group_by(CourseSchedule.course_code)
+    #                 .all())
     
-    course_codes_stack = []
-    course_indices_stack = {}
+    # course_codes_stack = []
+    # course_indices_stack = {}
     
-    for course_code_tuple in course_codes:
-        course_code = course_code_tuple[0]
-        course_codes_stack.append(course_code)
+    # for course_code_tuple in course_codes:
+    #     course_code = course_code_tuple[0]
+    #     course_codes_stack.append(course_code)
         
-        course_index = (db.session.query(CourseSchedule.course_index)
-                        .filter_by(user_id=user_id, course_code=course_code)
-                        .group_by(CourseSchedule.course_index)
-                        .all())
+    #     course_index = (db.session.query(CourseSchedule.course_index)
+    #                     .filter_by(user_id=user_id, course_code=course_code)
+    #                     .group_by(CourseSchedule.course_index)
+    #                     .all())
         
-        indices_stack = [index_tuple[0] for index_tuple in course_index]
+    #     indices_stack = [index_tuple[0] for index_tuple in course_index]
     
-        # Map this list of indices to the course code in the dictionary
-        course_indices_stack[course_code] = indices_stack
+    #     # Map this list of indices to the course code in the dictionary
+    #     course_indices_stack[course_code] = indices_stack
 
-    if course_codes_stack: # Check that course_code_stack is not empty before popping
-        pop_course = course_codes_stack.pop()
-        course_schedule_stack = []
-        course_schedule_stack.append(pop_course)
+    # pop_course = course_codes_stack.pop()
+    # course_schedule_stack = []
+    # course_schedule_stack.append(pop_course)
 
     
  
@@ -147,7 +146,7 @@ def clash_free(current_index, weekly_schedule, user_id, course_code):
              scheduled_class = weekly_schedule[day][time]
              for classes in scheduled_class:
                  if classes['remarks'] != '':
-                     return False
+	                 return False
                  
                  if classes['remarks'] != odd and classes['remarks'] != even:
                      return False
@@ -169,6 +168,17 @@ def populate_schedule(current_index, weekly_schedule, user_id, course_code):
                                                    course_index=current_index).all()
     
     for details in index_details:
+        if not details.time: # Some Modules don't have specific timings so this prevents an error
+            class_details = {
+                'type': details.type,
+                'course': details.course_code, # New Variable to track course code
+                'index': details.course_index,
+                'group': details.group,
+                'venue': details.venue,
+                'remarks': details.remark
+            }
+            return
+        
         # Split the time string into start and end times
         start_time_str, end_time_str = details.time.split('-')
         start_time = datetime.strptime(start_time_str, '%H%M')

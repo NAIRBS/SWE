@@ -9,10 +9,8 @@ def generate_otp():
     return ''.join(random.choices(string.digits, k=6))
 
 SCOPES = ['https://www.googleapis.com/auth/gmail.send']
-#filePathCred = 'C:\\Users\\Di heng\\Desktop\\SCSE Y2S2\\SC2006 Software Engineering\\Project\\credentials.json'
-filePathCred = 'C:\\Users\\NAIRB\\Downloads\\SimplyStars 180224\\credentials.json'
-#filePathToken = 'C:\\Users\\Di heng\\Desktop\\SCSE Y2S2\\SC2006 Software Engineering\\Project\\token.json'
-filePathToken = 'C:\\Users\\NAIRB\\Downloads\\SimplyStars 180224\\token.json'
+filePathCred = 'C:\\Users\\NAIRB\\Downloads\\SimplyStars 310324\\credentials.json'
+filePathToken = 'C:\\Users\\NAIRB\\Downloads\\SimplyStars 310324\\token.json'
 
 # Function to send email using Gmail API
 def send_email(receiver_email, otp):
@@ -47,7 +45,7 @@ def send_email(receiver_email, otp):
     
 def main():
     creds = None
-    token_json_path = 'token.json'
+    token_json_path = "token.json"
     redirect_uri = 'http://localhost:5000/home'
     SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 
@@ -62,9 +60,19 @@ def main():
         else:
             flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
             flow.redirect_uri = redirect_uri
-            creds = flow.run_local_server(port=5000)
+            # Request offline access and force re-consent to get a refresh token
+            flow.run_local_server(port=5000, access_type='offline', prompt='consent')
+
         # Save the credentials to token.json
         with open(token_json_path, 'w') as token:
             token.write(creds.to_json())
 
     return build('gmail', 'v1', credentials=creds)
+
+def check_credentials():
+    token_json_path = filePathToken
+    if os.path.exists(token_json_path):
+        creds = Credentials.from_authorized_user_file(token_json_path, SCOPES)
+        if creds and creds.valid:
+            return creds
+    return None

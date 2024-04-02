@@ -267,8 +267,8 @@ def delete_course(course_code):
 
 @app.route('/delete', methods=['POST'])
 def delete():
-    
-    if session['timetable_mode'] == 'automated':
+    timetable_mode = session.get('timetable_mode')  # Avoid KeyError
+    if timetable_mode == 'automated':
         try:
             session['timetable_mode'] = 'default'
             db.session.query(CourseCode).delete()
@@ -280,6 +280,7 @@ def delete():
             return redirect(url_for(main_page))
         except Exception as e:
             db.session.rollback()
+    
     try:
         db.session.query(CourseCode).delete()
         db.session.query(CourseSchedule).delete()
@@ -308,7 +309,6 @@ def set_day_preference():
 
 @app.route('/automate_timetable', methods=['GET'])
 def automate_timetable():
-    
     coursecode = CourseCode.query.filter_by(user=current_user.id).all()
     if not coursecode:
 
@@ -317,14 +317,14 @@ def automate_timetable():
     time_preference = session.get('time_preference')
     day_preference = session.get('day_preference')
     
-    if not time_preference and not day_preference:
+    if not time_preference:
         return jsonify({'status': 'error', 'message': 'No preference selected'})
 
     session['timetable_mode'] = 'automated'
 
     automated_results = get_automated_schedule(current_user.id, time_preference, day_preference)
     session['weekly_schedules'] = json.dumps(automated_results[0])
-
+    print(automated_results[0])
     if automated_results[1] == False:
         session['timetable_mode'] = 'default'
         del session['weekly_schedules']
