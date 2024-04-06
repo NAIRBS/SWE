@@ -1,5 +1,4 @@
-
-<img src="https://github.com/NAIRBS/SimplyStars-Course-Planner-Prototype/assets/86892301/04a1819c-b2f4-43b6-9a90-270d2b2a39f4" alt="Image" width="1200"/>
+<img src="https://github.com/NAIRBS/SimplyStars-Course-Planner-Prototype/assets/86892301/921a61c7-e607-4fa5-83e4-d880322af366" alt="Image" width="1200"/>
 
 
 > [!IMPORTANT]
@@ -108,6 +107,7 @@ google.auth.exceptions.RefreshError: ('invalid_grant: Token has been expired or 
 
 # Additional Details
 ### You can view the Database file in instance >> SimplyStars.db with [DB Browser](https://sqlitebrowser.org/dl/)
+<!--
 The Database already comes with a default account:
 ```
 Username: test
@@ -115,19 +115,4 @@ Password: 1234
 ```
 
 > This account can be used to log into SimplyStars if the user does not want to create an account, or has trouble with the Gmail OTP API and cannot create one themselves. 
-
-# Current To Do List (Front End)
-> **Note:** Backend last retrieved on 22th Mar 2024
-
-* Make it so that cells merge when there are consecutive hours of the same session (rowspan)
-* Cannot logout/signout
-* Show alert when wrong OTP (or when cannot generate OTP)
-* always generate one timetable if the same preferences and courses
-* Add a notice to show that timetable generation is no longer possible
-
-
-## Extra Features to be done but absolutely optional
-* Allow users to select course index
-* When searching for index codes, autogenerate the course names so people can select them (optional but a major non-functional plus point if working)
-* Button to minimize details in the timetable
-* NO more clashes allowed, don't need to make functionality for it, but would be good if we make a warning/highlight text in red in the case that SimplyStars fails to stop schedule clashes from showing up.
+-->
