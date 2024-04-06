@@ -55,8 +55,16 @@ class AutomatedSchedulingStrategy(SchedulingStrategy):
                     end_interval_time = start_time + timedelta(minutes=50)
                     time_slot = format_time(start_time) + '-' + format_time(end_interval_time)
                     
-                    class_details = {'type': details.type, 'index': details.course_index, 'group': details.group, 'venue': details.venue, 'remarks': details.remark}
-                    
+                    class_details = {
+                        'type': details.type,
+                        'course': details.course_code,
+                        'index': details.course_index,
+                        'group': details.group,
+                        'venue': details.venue,
+                        'remarks': details.remark
+                     }
+
+
                     if time_slot in weekly_schedule[details.day]:
                         existing_entry = weekly_schedule[details.day][time_slot]
                         if isinstance(existing_entry, list):
@@ -146,6 +154,7 @@ class DefaultSchedulingStrategy(SchedulingStrategy):
             
                     class_details = {
                     'type': details.type,
+                    'course': details.course_code,
                     'index': details.course_index,
                     'group': details.group,
                     'venue': details.venue,
