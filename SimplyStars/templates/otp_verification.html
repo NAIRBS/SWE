@@ -19,20 +19,20 @@ Verify OTP
     }
 
     .form-group {
-        margin-top: 20px; 
+        margin-top: 20px; /* Adjust the margin as needed */
     }
 
     input {
         text-align: center;
-        width: 2em;  
-        margin: 0 5px;   
+        width: 2em; 
+        margin: 0 5px; 
     }
 </style>
 
 <body>
     <div class="otp-verification-container">
         <h2>Enter your 6-digit OTP now:</h2>
-        <form method="POST" action="{{ url_for('otp_reset_verify') }}">
+        <form method="POST" action="{{ url_for('AccountController.otp_verification') }}">
             {{ form.hidden_tag() }}
             
             <!-- Hidden input field for the concatenated OTP -->
@@ -71,6 +71,7 @@ Verify OTP
         function moveToNext(currentInput, nextInputId) {
             const maxLength = parseInt(currentInput.getAttribute('maxlength'));
             const currentLength = currentInput.value.length;
+
             if (currentLength === maxLength) {
                 const nextInput = document.getElementById(nextInputId);
                 if (nextInput) {

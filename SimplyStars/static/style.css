@@ -9,6 +9,19 @@
     --timetable-hover-focus: #011321;  /* Color when hovering over timetable row + column = Current Cell */
 }
 
+.error-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    z-index: 9999; /* Ensure it appears above other elements */
+}
+
 .top-bar {
     background-color: var(--topbar-color);
     height: 50px; 
@@ -68,6 +81,17 @@
     position: absolute;
     border: none;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.logout-button:hover,
+.logout-button:focus {
+    background-color: #d32f2f; /* Darken color on hover */
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.24); /* Add a shadow to lift the button off the page */
+}
+
+.logout-button:active {
+    background-color: #b71c1c; /* Even darker color when the button is clicked */
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.24); /* Smaller shadow to give a pressed effect */
 }
 
 .content-container {

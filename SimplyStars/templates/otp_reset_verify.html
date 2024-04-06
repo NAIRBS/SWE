@@ -32,7 +32,8 @@ Verify OTP
 <body>
     <div class="otp-verification-container">
         <h2>Enter your 6-digit OTP now:</h2>
-        <form method="POST" action="{{ url_for('otp_reset_verify') }}">
+        <div id="otpError" class="alert alert-danger" style="display: none;"></div>
+        <form method="POST" action="{{ url_for('AccountController.otp_reset_verify') }}">
             {{ form.hidden_tag() }}
             
             <!-- Hidden input field for the concatenated OTP -->
@@ -40,7 +41,7 @@ Verify OTP
 
             <div class="form-group">
                 {% for i in range(1, 7) %}
-                <input type="text" id="digit-{{ i }}" name="digit-{{ i }}" pattern="\d" size="1" maxlength="1" required oninput="moveToNext(this, 'digit-{{ i+1 }}'); concatenateOTP();" onkeydown="moveBackOnBackspace(event, this);">
+                <input type="text" id="digit-{{ i }}" name="digit-{{ i }}" pattern="\d" size="1" maxlength="1" required oninput="moveToNext(this, 'digit-{{ i+1 }}'); concatenateOTP();" concatenateOTP();" onkeydown="moveBackOnBackspace(event, this);">
                 {% endfor %}
                 
                 {% if form.otp.errors %}
@@ -88,5 +89,53 @@ Verify OTP
             document.getElementById('hidden-otp').value = otp;
         }
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            const otpErrorDiv = document.getElementById('otpError'); // Get the error message div
+        
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Clear any previous error messages
+                otpErrorDiv.textContent = ''; 
+                otpErrorDiv.style.display = 'none';
+        
+                // Assuming you have the concatenateOTP function defined as before
+                concatenateOTP();
+        
+                // Send AJAX POST request to the server
+                fetch('/otp_reset_verify', {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw response;
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        // Redirect if OTP verification was successful
+                        window.location.href = data.redirect_url;
+                    }
+                })
+                .catch((error) => {
+                    error.json().then(err => {
+                        // Display error message if OTP is invalid
+                        otpErrorDiv.textContent = err.error; // Set the error text
+                        otpErrorDiv.style.display = 'block'; // Make the error div visible
+                    });
+                });
+            });
+        });
+        
+        </script>
+        
 </body>
 {% endblock %}
