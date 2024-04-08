@@ -9,8 +9,8 @@ def generate_otp():
     return ''.join(random.choices(string.digits, k=6))
 
 SCOPES = ['https://www.googleapis.com/auth/gmail.send']
-filePathCred = 'C:\\Users\\NAIRB\\Downloads\\SimplyStars 060424\\credentials.json'
-filePathToken = 'C:\\Users\\NAIRB\\Downloads\\SimplyStars 060424\\token.json'
+filePathCred = 'C:\\Users\\NAIRB\\Downloads\\SimplyStars 080424\\credentials.json'
+filePathToken = 'C:\\Users\\NAIRB\\Downloads\\SimplyStars 080424\\token.json'
 
 # Function to send email using Gmail API
 def send_email(receiver_email, otp):

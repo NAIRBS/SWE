@@ -63,8 +63,7 @@ class AutomatedSchedulingStrategy(SchedulingStrategy):
                         'venue': details.venue,
                         'remarks': details.remark
                      }
-
-
+                    
                     if time_slot in weekly_schedule[details.day]:
                         existing_entry = weekly_schedule[details.day][time_slot]
                         if isinstance(existing_entry, list):
@@ -82,10 +81,10 @@ class AutomatedSchedulingStrategy(SchedulingStrategy):
         weekly_schedule_types = {'MON': {}, 'TUE': {}, 'WED': {}, 'THU': {}, 'FRI': {}}
         
         course_codes = (db.session.query(CourseSchedule.course_code).filter_by(user_id=user_id).group_by(CourseSchedule.course_code).all())
-        result = False
 
         for course_code_tuple in course_codes:
             course_code = course_code_tuple[0]
+            result = False
 
             course_index = (db.session.query(CourseSchedule.course_index).filter_by(user_id=user_id, course_code=course_code).group_by(CourseSchedule.course_index).all())
             
@@ -154,7 +153,6 @@ class DefaultSchedulingStrategy(SchedulingStrategy):
             
                     class_details = {
                     'type': details.type,
-                    'course': details.course_code,
                     'index': details.course_index,
                     'group': details.group,
                     'venue': details.venue,
